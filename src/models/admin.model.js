@@ -25,7 +25,7 @@ const adminSchema = new Schema({
     { timestamps: true })
 
 // hashing admin password
-userSchema.pre('save', async function (next) {
+adminSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
 
     try {
@@ -38,7 +38,7 @@ userSchema.pre('save', async function (next) {
 })
 
 // generate access token
-userSchema.methods.generateAccessToken = async function () {
+adminSchema.methods.generateAccessToken = async function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -54,7 +54,7 @@ userSchema.methods.generateAccessToken = async function () {
 }
 
 // matching admin password
-userSchema.methods.isPasswordCorrect = async function (password) {
+adminSchema.methods.isPasswordCorrect = async function (password) {
     if (password) {
         return await bcrypt.compare(password, this.password)
     }
