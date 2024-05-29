@@ -27,6 +27,10 @@ const outletSchema = new Schema({
         ref: 'Kitchen',
         required: [true, 'Kitchen Id is required']
     },
+    ordersId: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Orders'
+    },
     password: {
         type: String,
         required: [true, 'Password is required']
