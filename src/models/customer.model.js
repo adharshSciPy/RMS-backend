@@ -24,4 +24,4 @@ const customerSchema = new Schema({
     { timestamps: true })
 
 
-export const Menu = mongoose.model("Customer", customerSchema)
+export const Customer = mongoose.model("Customer", customerSchema)
