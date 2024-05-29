@@ -1,29 +1,22 @@
 import mongoose, { Schema } from 'mongoose'
 
 //item schema for embedding in items field in menu schema
-const itemsSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, 'Item Name is required']
-    },
-    price: {
-        type: Number,
-        required: [true, 'Item Price is required']
+const itemsEmbedSchema = new Schema({
+    itemId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
+        required: [true, 'Item Id is required']
     },
     quantity: {
         type: Number,
         required: [true, 'Item Quantity is required']
-    },
-    desciption: {
-        type: String,
-        required: [true, 'Item Description is required']
     }
-}, { timestamps: true })
+}, { timestamps: true });
 
 
 const menuSchema = new Schema({
     items: {
-        type: [itemsSchema],
+        type: [itemsEmbedSchema],
         required: [true, 'Items required to create a menu']
     },
     kitchenId: {
