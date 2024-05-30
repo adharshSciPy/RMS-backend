@@ -31,7 +31,7 @@ const registerCompany = async (req, res) => {
             return res.status(500).json({ message: 'Company registration failed' });
         }
 
-        return res.status(201).json({ message: 'Company registration succesfull', company: createdCompany });
+        return res.status(201).json({ message: 'Company registration succesfull', data: createdCompany });
 
     }
     catch (err) {
