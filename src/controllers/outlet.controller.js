@@ -34,7 +34,7 @@ const registerOutlet = async (req, res) => {
         const kitchen = await Kitchen.findOne({ _id: kitchenId })
         const company = await Company.findOne({ _id: companyId })
         if (!kitchen && !company) {
-            return res.status(404).json({ message: "Kitchen doesn't exist" });
+            return res.status(404).json({ message: "Kitchen or Company doesn't exist" });
         }
 
         //outlet creation

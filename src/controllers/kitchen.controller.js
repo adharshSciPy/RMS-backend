@@ -1,4 +1,5 @@
 import { Kitchen } from "../models/kitchen.model.js";
+import { Company } from "../models/company.model.js"
 import { passwordValidator } from "../utils/passwordvalidator.util.js";
 
 const registerKitchen = async (req, res) => {
@@ -28,8 +29,19 @@ const registerKitchen = async (req, res) => {
             return res.status(409).json({ message: 'Kitchen Email is already in use' });
         }
 
+        //verify company
+        const company = await Company.findOne({ _id: companyId })
+        if (!company) {
+            return res.status(404).json({ message: "Company doesn't exist" });
+        }
+
         //kitchen creation
         const kitchen = await Kitchen.create({ kitchenName, email, password, companyId });
+
+        //created kitchen's id pushed to kitchenIds array in company schema
+        company.kitchenIds.push(kitchen._id)
+        await company.save()
+
         const createdKitchen = await Kitchen.findOne({ _id: kitchen._id }).select('-password -menuId -outletIds -companyId');
 
         if (!createdKitchen) {
