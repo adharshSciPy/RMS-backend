@@ -1,5 +1,6 @@
 import { Outlet } from "../models/outlet.model.js"
 import { Kitchen } from "../models/kitchen.model.js"
+import { Company } from "../models/company.model.js"
 import { passwordValidator } from "../utils/passwordvalidator.util.js"
 
 const registerOutlet = async (req, res) => {
@@ -29,18 +30,21 @@ const registerOutlet = async (req, res) => {
             return res.status(409).json({ message: 'Outlet Email is already in use' });
         }
 
-        //verify kitchen
+        //verify kitchen and company
         const kitchen = await Kitchen.findOne({ _id: kitchenId })
-        if (!kitchen) {
+        const company = await Company.findOne({ _id: companyId })
+        if (!kitchen && !company) {
             return res.status(404).json({ message: "Kitchen doesn't exist" });
         }
 
         //outlet creation
         const outlet = await Outlet.create({ outletName, email, password, companyId, kitchenId });
 
-        //created outlet id pushing to kitchen's outletIds array
+        //created outlet id pushing to kitchen's outletIds array and company's outletIds array
         kitchen.outletIds.push(outlet._id)
+        company.outletIds.push(outlet._id)
         await kitchen.save()
+        await company.save()
 
         const createdOutlet = await Outlet.findOne({ _id: outlet._id }).select('-password -ordersId -kitchenId -createdAt -updatedAt -__v');
 
