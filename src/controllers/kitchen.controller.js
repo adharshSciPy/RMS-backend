@@ -7,6 +7,10 @@ const registerKitchen = async (req, res) => {
 
     try {
         // sanitiasing inputs
+        if (!companyId) {
+            return res.status(401).json({ message: "Company Id missing" })
+        }
+
         const isEmptyFields = [kitchenName, email, password].some((field) => field?.trim() === "")
         if (isEmptyFields) {
             return res.status(401).json({ message: "All fields are required", })

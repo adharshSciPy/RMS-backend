@@ -3,7 +3,7 @@ import { registerKitchen, loginKitchen } from "../controllers/kitchen.controller
 
 const kitchenRoute = Router()
 
-kitchenRoute.route('/register').post(registerKitchen)
+kitchenRoute.route('/register/:companyId').post(registerKitchen)
 kitchenRoute.route('/login').post(loginKitchen)
 
 export default kitchenRoute
