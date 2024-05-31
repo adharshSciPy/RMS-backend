@@ -29,8 +29,8 @@ const registerOutlet = async (req, res) => {
         }
 
         //outlet creation
-        const outlet = await Outlet.create({ outletName, email, password, companyId });
-        const createdOutlet = await Outlet.findOne({ _id: outlet._id }).select('-password -ordersId -kitchenId');
+        const outlet = await Outlet.create({ outletName, email, password, companyId, kitchenId });
+        const createdOutlet = await Outlet.findOne({ _id: outlet._id }).select('-password -ordersId -kitchenId -createdAt -updatedAt -__v');
 
         if (!createdOutlet) {
             return res.status(500).json({ message: 'Outlet registration failed' });
