@@ -6,6 +6,7 @@ import { limiter } from "./utils/ratelimitter.utils.js"
 import adminRoute from "./routes/admin.route.js"
 import companyRoute from "./routes/company.route.js"
 import kitchenRoute from "./routes/kitchen.route.js"
+import outletRoute from "./routes/outlet.route.js"
 
 const app = express()
 
@@ -23,5 +24,6 @@ app.use(limiter)
 app.use('/api/v1/admin', adminRoute)
 app.use('/api/v1/company', companyRoute)
 app.use('/api/v1/kitchen', kitchenRoute)
+app.use('/api/v1/outlet', outletRoute)
 
 export { app }
