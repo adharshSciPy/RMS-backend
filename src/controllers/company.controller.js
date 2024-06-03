@@ -71,4 +71,34 @@ const loginCompany = async (req, res) => {
     }
 };
 
-export { registerCompany, loginCompany }
+const blockOrUnblockCompany = async (req, res) => {
+
+    const { companyId } = req.params
+    const { isBlocked } = req.body
+
+    try {
+        //sanitizing inputs
+        if (isBlocked === undefined) {
+            return res.status(400).json({ message: "isBlocked field is missing" });
+        }
+
+        const company = await Company.findById(companyId)
+
+        //validating company
+        if (!company) {
+            return res.status(404).json({ message: "Company doesn't exist" });
+        }
+
+        //updating company restriction as isBlock's value
+        company.isBlocked = isBlocked;
+        await company.save();
+
+        return res.status(200).json({ message: `${company.companyName} ${isBlocked ? 'Blocked' : 'Unblocked'} Succesfully` })
+
+    }
+    catch (err) {
+        return res.status(500).json({ message: `Internal Server due to ${err.message}` });
+    }
+}
+
+export { registerCompany, loginCompany, blockOrUnblockCompany }
