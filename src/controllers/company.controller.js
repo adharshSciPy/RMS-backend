@@ -80,7 +80,7 @@ const loginCompany = async (req, res) => {
 // @PATCH
 // company/:companyId/block
 // desc: Kitchen's block management api for super admin
-const blockOrUnblockCompany = async (req, res) => { 
+const blockOrUnblockCompany = async (req, res) => {
 
     const { companyId } = req.params
     const { isBlocked } = req.body
@@ -110,4 +110,74 @@ const blockOrUnblockCompany = async (req, res) => {
     }
 }
 
-export { registerCompany, loginCompany, blockOrUnblockCompany }
+// @GET
+// company/companies?skip?limit
+// desc: Returns list of total companies with its kitchen and outlets details(Paginated API)
+const listAllCompanies = async (req, res) => {
+
+    const { page = 1, limit = 10 } = req.query;
+
+    // skip logic
+    const skip = (page - 1) * limit;
+
+    try {
+
+        // pagination logic
+        const totalCompaniesCount = await Company.countDocuments();
+        const totalPages = Math.ceil(totalCompaniesCount / limit);
+        const hasNextPage = page < totalPages;
+
+        //aggregrate companies details
+        const companies = await Company.aggregate([
+            {
+                $lookup: {
+                    from: "kitchens",
+                    localField: "_id",
+                    foreignField: "companyId",
+                    as: "kitchens"
+                }
+            },
+            {
+                $lookup: {
+                    from: "outlets",
+                    localField: "_id",
+                    foreignField: "companyId",
+                    as: "outlets"
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    companyName: 1,
+                    email: 1,
+                    isBlocked: 1,
+                    kitchens: {
+                        _id: 1,
+                        kitchenName: 1,
+                        email: 1
+                    },
+                    outlets: {
+                        _id: 1,
+                        outletName: 1,
+                        email: 1
+                    }
+                }
+            },
+            { $skip: parseInt(skip) },
+            { $limit: parseInt(limit) }
+        ])
+
+        if (companies.length === 0) {
+            return res.status(404).json({ message: 'No companies found' });
+        }
+
+        res.status(200).json({ message: 'Companies found succesfull', data: companies })
+
+    }
+    catch (err) {
+        return res.status(500).json({ message: `Internal Server due to ${err.message}` });
+    }
+
+}
+
+export { registerCompany, loginCompany, blockOrUnblockCompany, listAllCompanies }
