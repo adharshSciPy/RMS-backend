@@ -88,4 +88,34 @@ const loginKitchen = async (req, res) => {
     }
 };
 
-export { registerKitchen, loginKitchen }
+const blockOrUnblockKitchen = async (req, res) => {
+
+    const { kitchenId } = req.params
+    const { isBlocked } = req.body
+
+    try {
+        //sanitizing inputs
+        if (isBlocked === undefined) {
+            return res.status(400).json({ message: "isBlocked field is missing" });
+        }
+
+        const kitchen = await Kitchen.findById(kitchenId)
+
+        //validating company
+        if (!kitchen) {
+            return res.status(404).json({ message: "Kitchen doesn't exist" });
+        }
+
+        //updating company restriction as isBlock's value
+        kitchen.isBlocked = isBlocked;
+        await kitchen.save();
+
+        return res.status(200).json({ message: `${kitchen.kitchenName} ${isBlocked ? 'Blocked' : 'Unblocked'} Succesfully` })
+
+    }
+    catch (err) {
+        return res.status(500).json({ message: `Internal Server due to ${err.message}` });
+    }
+}
+
+export { registerKitchen, loginKitchen, blockOrUnblockKitchen }

@@ -33,6 +33,10 @@ const kitchenSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required']
+    },
+    isBlocked: {
+        type: Boolean,
+        default: false
     }
 },
     { timestamps: true })
