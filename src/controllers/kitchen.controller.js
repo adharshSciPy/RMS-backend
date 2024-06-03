@@ -96,7 +96,7 @@ const loginKitchen = async (req, res) => {
 
 // @PATCH
 // kitchen/:kitchenId/block
-// desc: itchen's block management api for super admin
+// desc: Kitchen's block management api for super admin
 const blockOrUnblockKitchen = async (req, res) => {
 
     const { kitchenId } = req.params

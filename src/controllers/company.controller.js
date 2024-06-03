@@ -79,7 +79,7 @@ const loginCompany = async (req, res) => {
 
 // @PATCH
 // company/:companyId/block
-// desc: Kitchen's block management api for super admin
+// desc: Company's block management api for super admin
 const blockOrUnblockCompany = async (req, res) => {
 
     const { companyId } = req.params
@@ -112,7 +112,7 @@ const blockOrUnblockCompany = async (req, res) => {
 
 // @GET
 // company/companies?skip?limit
-// desc: Returns list of total companies with its kitchen and outlets details(Paginated API)
+// desc: List all companies with its kitchen and outlets details(Paginated API)
 const listAllCompanies = async (req, res) => {
 
     const { page = 1, limit = 10 } = req.query;

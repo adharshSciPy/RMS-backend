@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "29d0296e-916f-4a24-838d-6c7cad8ae207",
+		"name": "RMS-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "35166566",
+		"_collection_link": "https://rms-api-9440.postman.co/workspace/RMS-AP%255BI-Workspace~02c700b8-41e6-45ac-8668-f938bad1adfb/collection/35166566-29d0296e-916f-4a24-838d-6c7cad8ae207?action=share&source=collection_link&creator=35166566"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"ADMINadmin@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{rms-baseurl}}/admin/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"ADMINadmin@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{rms-baseurl}}/admin/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyName\": \"New company 2\",\r\n    \"email\": \"company2@gmail.com\",\r\n    \"password\": \"COMPANYcompany@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{rms-baseurl}}/company/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"company@gmail.com\",\r\n    \"password\": \"COMPANYcompany@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{rms-baseurl}}/company/login"
+					},
+					"response": []
+				},
+				{
+					"name": "block",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isBlocked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rms-baseurl}}/company/:companyId/block",
+							"host": [
+								"{{rms-baseurl}}"
+							],
+							"path": [
+								"company",
+								":companyId",
+								"block"
+							],
+							"variable": [
+								{
+									"key": "companyId",
+									"value": "665d4d2a470b356b43fa0165"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rms-baseurl}}/company/companies?page=1&limit=10",
+							"host": [
+								"{{rms-baseurl}}"
+							],
+							"path": [
+								"company",
+								"companies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kitchen",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"kitchenName\": \"Seconde kitchen\",\r\n    \"email\": \"thirdkitchedne@gmail.com\",\r\n    \"password\": \"KITCHENkitchen@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rms-baseurl}}/kitchen/register/:companyId",
+							"host": [
+								"{{rms-baseurl}}"
+							],
+							"path": [
+								"kitchen",
+								"register",
+								":companyId"
+							],
+							"variable": [
+								{
+									"key": "companyId",
+									"value": "665982c417196ef28cbc9c9a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"newsecondkitchen@gmail.com\",\r\n    \"password\": \"KITCHENkitchen@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{rms-baseurl}}/kitchen/login"
+					},
+					"response": []
+				},
+				{
+					"name": "block",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isBlocked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rms-baseurl}}/kitchen/:kitchenId/block",
+							"host": [
+								"{{rms-baseurl}}"
+							],
+							"path": [
+								"kitchen",
+								":kitchenId",
+								"block"
+							],
+							"variable": [
+								{
+									"key": "kitchenId",
+									"value": "665d636fa57e2e3b11f19a0e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "outlet",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"outletName\": \"New outlet\",\r\n    \"email\": \"firstoutdlet@gmail.com\",\r\n    \"password\": \"OUTLEToutlet@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rms-baseurl}}/outlet/register/:companyId/:kitchenId",
+							"host": [
+								"{{rms-baseurl}}"
+							],
+							"path": [
+								"outlet",
+								"register",
+								":companyId",
+								":kitchenId"
+							],
+							"variable": [
+								{
+									"key": "companyId",
+									"value": "665982c417196ef28cbc9c9a"
+								},
+								{
+									"key": "kitchenId",
+									"value": "665982d617196ef28cbc9ca1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"outletName\": \"New outlet\",\r\n    \"email\": \"newoutlet@gmail.com\",\r\n    \"password\": \"OUTLEToutlet@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{rms-baseurl}}/outlet/login"
+					},
+					"response": []
+				},
+				{
+					"name": "block",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isBlocked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rms-baseurl}}/outlet/:outletId/block",
+							"host": [
+								"{{rms-baseurl}}"
+							],
+							"path": [
+								"outlet",
+								":outletId",
+								"block"
+							],
+							"variable": [
+								{
+									"key": "outletId",
+									"value": "665d63f6a57e2e3b11f19a20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "rms-baseurl",
+			"value": "http://localhost:8000/api/v1"
+		}
+	]
+}
