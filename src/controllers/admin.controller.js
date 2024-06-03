@@ -1,6 +1,9 @@
 import { Admin } from "../models/admin.model.js";
 import { passwordValidator } from "../utils/passwordvalidator.util.js";
 
+// @POST
+// admin/register
+// desc: Creating super admin with all level of access to the system
 const registerAdmin = async (req, res) => {
     const { name, email, password } = req.body
 
@@ -39,6 +42,9 @@ const registerAdmin = async (req, res) => {
     }
 }
 
+// @POST
+// admin/login
+// desc: Login api of super admin with credentials
 const loginAdmin = async (req, res) => {
     const { email, password } = req.body;
 

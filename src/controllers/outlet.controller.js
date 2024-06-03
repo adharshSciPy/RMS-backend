@@ -3,6 +3,9 @@ import { Kitchen } from "../models/kitchen.model.js"
 import { Company } from "../models/company.model.js"
 import { passwordValidator } from "../utils/passwordvalidator.util.js"
 
+// @POST
+// outlet/register/:companyId/:kitchenId
+// body: Creating a new outlet under a company's kitchen
 const registerOutlet = async (req, res) => {
     const { companyId, kitchenId } = req.params
     const { outletName, email, password } = req.body
@@ -60,6 +63,9 @@ const registerOutlet = async (req, res) => {
     }
 }
 
+// @POST
+// outlet/login
+// body: Login api of Outlet with credentials
 const loginOutlet = async (req, res) => {
     const { email, password } = req.body;
 
@@ -92,6 +98,9 @@ const loginOutlet = async (req, res) => {
     }
 };
 
+// @PATCH
+// outlet/:outletId/block
+// body: Outlet's block management api for super admin
 const blockOrUnblockOutlet = async (req, res) => {
 
     const { outletId } = req.params

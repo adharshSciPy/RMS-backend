@@ -1,6 +1,9 @@
 import { Company } from "../models/company.model.js";
 import { passwordValidator } from "../utils/passwordvalidator.util.js";
 
+// @POST
+// company/register
+// body: Creating a new compnay(business) by admin
 const registerCompany = async (req, res) => {
     const { companyName, email, password } = req.body
 
@@ -39,6 +42,9 @@ const registerCompany = async (req, res) => {
     }
 }
 
+// @POST
+// company/login
+// body: Login api of Comapny with credentials
 const loginCompany = async (req, res) => {
     const { email, password } = req.body;
 
@@ -71,7 +77,10 @@ const loginCompany = async (req, res) => {
     }
 };
 
-const blockOrUnblockCompany = async (req, res) => {
+// @PATCH
+// company/:companyId/block
+// body: Kitchen's block management api for super admin
+const blockOrUnblockCompany = async (req, res) => { 
 
     const { companyId } = req.params
     const { isBlocked } = req.body
