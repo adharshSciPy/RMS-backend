@@ -92,4 +92,34 @@ const loginOutlet = async (req, res) => {
     }
 };
 
-export { registerOutlet, loginOutlet }
+const blockOrUnblockOutlet = async (req, res) => {
+
+    const { outletId } = req.params
+    const { isBlocked } = req.body
+
+    try {
+        //sanitizing inputs
+        if (isBlocked === undefined) {
+            return res.status(400).json({ message: "isBlocked field is missing" });
+        }
+
+        const outlet = await Outlet.findById(outletId)
+
+        //validating company
+        if (!outlet) {
+            return res.status(404).json({ message: "Outlet doesn't exist" });
+        }
+
+        //updating company restriction as isBlock's value
+        outlet.isBlocked = isBlocked;
+        await outlet.save();
+
+        return res.status(200).json({ message: `${outlet.outletName} ${isBlocked ? 'Blocked' : 'Unblocked'} Succesfully` })
+
+    }
+    catch (err) {
+        return res.status(500).json({ message: `Internal Server due to ${err.message}` });
+    }
+}
+
+export { registerOutlet, loginOutlet, blockOrUnblockOutlet }
