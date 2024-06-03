@@ -4,7 +4,7 @@ import { passwordValidator } from "../utils/passwordvalidator.util.js";
 
 // @POST
 // kitchen/register/:companyId
-// body: Creating a new kitchen under a company
+// desc: Creating a new kitchen under a company
 const registerKitchen = async (req, res) => {
     const { companyId } = req.params
     const { kitchenName, email, password } = req.body
@@ -61,7 +61,7 @@ const registerKitchen = async (req, res) => {
 
 // @POST
 // kitchen/login
-// body: Login api of kitchen with credentials
+// desc: Login api of kitchen with credentials
 const loginKitchen = async (req, res) => {
     const { email, password } = req.body;
 
@@ -96,7 +96,7 @@ const loginKitchen = async (req, res) => {
 
 // @PATCH
 // kitchen/:kitchenId/block
-// body: Kitchen's block management api for super admin
+// desc: itchen's block management api for super admin
 const blockOrUnblockKitchen = async (req, res) => {
 
     const { kitchenId } = req.params

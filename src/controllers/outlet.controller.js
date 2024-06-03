@@ -5,7 +5,7 @@ import { passwordValidator } from "../utils/passwordvalidator.util.js"
 
 // @POST
 // outlet/register/:companyId/:kitchenId
-// body: Creating a new outlet under a company's kitchen
+// desc: Creating a new outlet under a company's kitchen
 const registerOutlet = async (req, res) => {
     const { companyId, kitchenId } = req.params
     const { outletName, email, password } = req.body
@@ -65,7 +65,7 @@ const registerOutlet = async (req, res) => {
 
 // @POST
 // outlet/login
-// body: Login api of Outlet with credentials
+// desc: Login api of Outlet with credentials
 const loginOutlet = async (req, res) => {
     const { email, password } = req.body;
 
@@ -100,7 +100,7 @@ const loginOutlet = async (req, res) => {
 
 // @PATCH
 // outlet/:outletId/block
-// body: Outlet's block management api for super admin
+// desc: Outlet's block management api for super admin
 const blockOrUnblockOutlet = async (req, res) => {
 
     const { outletId } = req.params
